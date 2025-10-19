@@ -23,7 +23,7 @@ class InvoiceManager:
         data = read_json(self.path)
         self._data = data if data else {"invoices": []}
         self._gate_pass_state: Dict[str, int] = {}  # date -> last number
-        self._lock = threading.Lock()
+        self._lock = threading.RLock()
 
     def _save(self) -> None:
         write_json(self.path, self._data)
@@ -46,12 +46,13 @@ class InvoiceManager:
         return f"{prefix}{str(max_num + 1).zfill(4)}"
 
     def _next_gate_pass_number(self, dt_str: Optional[str] = None) -> str:
-        # Daily reset: GP-YYYYMMDD-001
-        if not dt_str:
-            dt_str = date.today().strftime("%Y%m%d")
-        last = self._gate_pass_state.get(dt_str, 0) + 1
-        self._gate_pass_state[dt_str] = last
-        return f"GP-{dt_str}-{str(last).zfill(3)}"
+        with self._lock:
+            # Daily reset: GP-YYYYMMDD-001
+            if not dt_str:
+                dt_str = date.today().strftime("%Y%m%d")
+            last = self._gate_pass_state.get(dt_str, 0) + 1
+            self._gate_pass_state[dt_str] = last
+            return f"GP-{dt_str}-{str(last).zfill(3)}"
 
     def create_invoice(self, payload: Dict) -> Optional[Dict]:
         # Auto number if missing
@@ -87,5 +88,3 @@ class InvoiceManager:
                     self._save()
                     return True
         return False
-
-

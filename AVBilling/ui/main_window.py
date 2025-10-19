@@ -1,4 +1,4 @@
-'''#!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 from __future__ import annotations
@@ -162,21 +162,15 @@ class MainWindow(QMainWindow):
         backup_manager = BackupManager()
         try:
             backup_file = backup_manager.create_backup()
-            QMessageBox.information(self, "Backup Successful", f"Data successfully backed up to:
-{backup_file}")
+            QMessageBox.information(self, "Backup Successful", f"Data successfully backed up to:\n{backup_file}")
         except Exception as e:
             QMessageBox.critical(self, "Backup Failed", f"An error occurred during backup: {e}")
 
     def show_help(self) -> None:
         QMessageBox.information(self, "Help",
-                                "Use the sidebar or function keys (F1-F7) to navigate.
-"
+                                "Use the sidebar or function keys (F1-F7) to navigate.\n"
                                 "Shortcuts can be configured in the Settings page.")
 
     def show_about(self) -> None:
         QMessageBox.about(self, f"About {self.windowTitle()}",
-                        f"{self.windowTitle()} v1.0.0
-Built with Python and PyQt6.
-
-Developed by Mohammed Atif.")
-''
+                        f"{self.windowTitle()} v1.0.0\nBuilt with Python and PyQt6.\n\nDeveloped by Mohammed Atif.")

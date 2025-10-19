@@ -66,14 +66,11 @@ SAMPLE_PRODUCTS = {
     "products": [
         {
             "product_code": "PROD001",
-            "name": "Premium Besan",
-            "category": "Groceries",
-            "mrp": 100.0,
-            "selling_price": 95.0,
-            "stock": 500,
-            "unit": "kg",
-            "gst_percent": 5,
-            "hsn_code": "11061000",
+            "product_name": "Chand Besan",
+            "rate_1kg": 90,
+            "rate_half_kg": 50,
+            "gst_rate": 5,
+            "stock": 1000
         }
     ]
 }
