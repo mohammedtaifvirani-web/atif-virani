@@ -1,0 +1,12 @@
+{
+  "products": [
+    {
+      "product_code": "PROD001",
+      "product_name": "Chand Besan",
+      "rate_1kg": 90,
+      "rate_half_kg": 50,
+      "gst_rate": 5,
+      "stock": 1000
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "invoices": [
+    {
+      "invoice_no": "FY_2025-2026/INV/0001",
+      "customer_name": "Amit Traders",
+      "customer_id": "CUST001",
+      "items": [
+        {
+          "product_name": "Chand Besan 1kg",
+          "quantity": 100.0,
+          "rate": 100.0,
+          "discount": 1.0,
+          "gst": 5.0,
+          "line_total": 10395.0,
+          "gst_amount": 495.0
+        },
+        {
+          "product_name": "",
+          "quantity": 1.0,
+          "rate": 0.0,
+          "discount": 0.0,
+          "gst": 5.0,
+          "line_total": 0.0,
+          "gst_amount": 0.0
+        },
+        {
+          "product_name": "",
+          "quantity": 1.0,
+          "rate": 0.0,
+          "discount": 0.0,
+          "gst": 5.0,
+          "line_total": 0.0,
+          "gst_amount": 0.0
+        }
+      ],
+      "date": "2025-10-17",
+      "template": "simple",
+      "gate_pass_no": "GP-20251017-001",
+      "subtotal": 10000.0,
+      "discount_total": 100.0,
+      "gst_total": 495.0,
+      "grand_total": 10395.0,
+      "status": "cancelled"
+    },
+    {
+      "invoice_no": "FY_2025-2026/INV/0001",
+      "customer_name": "Amit Traders",
+      "customer_id": "CUST001",
+      "items": [
+        {
+          "product_name": "Chand Besan 1kg",
+          "quantity": 100.0,
+          "rate": 100.0,
+          "discount": 1.0,
+          "gst": 5.0,
+          "line_total": 10395.0,
+          "gst_amount": 495.0
+        },
+        {
+          "product_name": "",
+          "quantity": 1.0,
+          "rate": 0.0,
+          "discount": 0.0,
+          "gst": 5.0,
+          "line_total": 0.0,
+          "gst_amount": 0.0
+        },
+        {
+          "product_name": "",
+          "quantity": 1.0,
+          "rate": 0.0,
+          "discount": 0.0,
+          "gst": 5.0,
+          "line_total": 0.0,
+          "gst_amount": 0.0
+        }
+      ],
+      "date": "2025-10-17",
+      "template": "simple",
+      "gate_pass_no": "GP-20251017-002",
+      "subtotal": 10000.0,
+      "discount_total": 100.0,
+      "gst_total": 495.0,
+      "grand_total": 10395.0,
+      "status": "final"
+    }
+  ]
+}

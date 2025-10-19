@@ -1,0 +1,13 @@
+{
+  "customers": [
+    {
+      "customer_id": "CUST001",
+      "name": "Amit Traders",
+      "phone": "9876543210",
+      "address": "Lucknow",
+      "gst_no": "GST123",
+      "total_purchases": 2,
+      "total_amount": 20790.0
+    }
+  ]
+}

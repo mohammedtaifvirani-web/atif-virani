@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "company": {
+    "name": "AVBilling Demo Company",
+    "address": "",
+    "phone": "",
+    "gst_no": "",
+    "logo_path": ""
+  },
+  "ui": {
+    "theme": "light"
+  },
+  "shortcuts": {
+    "new_invoice": "Ctrl+N",
+    "save": "Ctrl+S",
+    "print": "Ctrl+P"
+  },
+  "invoice": {
+    "tax_default": 5,
+    "discount_default": 0
+  }
+}
