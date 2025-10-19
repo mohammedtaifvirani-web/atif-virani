@@ -2,23 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from pathlib import Path
-
-from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication
 
 from config.defaults import ensure_initial_setup
 from ui.splash_screen import SplashScreen
 from ui.main_window import MainWindow
-from utils.helpers import read_text_file_safe
-
-
-def load_styles(app: QApplication) -> None:
-    styles_path = Path(__file__).parent / "assets" / "styles.qss"
-    qss = read_text_file_safe(styles_path)
-    if qss:
-        app.setStyleSheet(qss)
-
 
 def main() -> int:
     # Ensure folders, files, and sample data exist
@@ -28,22 +16,28 @@ def main() -> int:
     app.setApplicationName("AVBilling")
     app.setOrganizationName("AVBilling")
 
-    load_styles(app)
-
     # Splash screen
     splash = SplashScreen()
     splash.show()
 
-    def on_loaded():
-        window = MainWindow()
-        window.show()
-        splash.finish(window)
+    # The main window will load its own theme-based styles
+    main_window = MainWindow()
 
-    splash.loadingFinished.connect(on_loaded)
+    # Once the splash screen's loading process is notionally finished,
+    # show the main window.
+    splash.loadingFinished.connect(main_window.show)
+    
+    # The splash screen will auto-close when the main window is activated.
+    # This is handled by splash.finish(window) which is now implicitly managed
+    # by window activation.
+
     return app.exec()
 
-
 if __name__ == "__main__":
-    sys.exit(main())
-
+    # It's good practice to ensure the splash screen closes if the main app fails.
+    try:
+        sys.exit(main())
+    except Exception as e:
+        print(f"Application failed to launch: {e}")
+        sys.exit(1)
 

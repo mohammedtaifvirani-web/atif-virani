@@ -1,0 +1,166 @@
+/* dark.qss */
+
+QWidget {
+    background-color: #2C3E50;
+    color: #ECF0F1;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+    font-size: 10pt;
+}
+
+QMainWindow, QDialog {
+    background-color: #212F3D;
+}
+
+/* Titles and Headers */
+#PageTitle {
+    font-size: 18pt;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+#NavTitle {
+    font-size: 14pt;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+QLabel, QGroupBox {
+    font-weight: 500;
+}
+
+QGroupBox {
+    font-size: 11pt;
+    font-weight: bold;
+    border: 1px solid #34495E;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 5px;
+    background-color: #2C3E50;
+}
+
+/* Buttons */
+QPushButton {
+    background-color: #34495E;
+    border: 1px solid #566573;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+QPushButton:hover {
+    background-color: #465a6d;
+    border-color: #708090;
+}
+
+QPushButton:pressed {
+    background-color: #283747;
+}
+
+#PrimaryButton {
+    background-color: #3498DB;
+    color: #FFFFFF;
+    border: none;
+}
+
+#PrimaryButton:hover {
+    background-color: #5DADE2;
+}
+
+#PrimaryButton:pressed {
+    background-color: #2E86C1;
+}
+
+#NavButton {
+    background: none;
+    border: none;
+    font-weight: normal;
+    color: #BDC3C7;
+}
+
+#NavButton:hover {
+    color: #FFFFFF;
+}
+
+/* Input Fields */
+QLineEdit, QComboBox, QPlainTextEdit, QKeySequenceEdit {
+    background-color: #34495E;
+    border: 1px solid #566573;
+    padding: 6px;
+    border-radius: 4px;
+    color: #ECF0F1;
+    min-height: 20px;
+}
+
+QLineEdit:focus, QComboBox:focus, QPlainTextEdit:focus {
+    border-color: #3498DB;
+}
+
+/* Tables */
+QTableWidget {
+    border: 1px solid #34495E;
+    gridline-color: #34495E;
+}
+
+QHeaderView::section {
+    background-color: #283747;
+    padding: 6px;
+    border: 1px solid #34495E;
+    font-weight: bold;
+}
+
+/* Scrollbars */
+QScrollBar:vertical {
+    background: #283747;
+    width: 12px;
+    margin: 0px;
+}
+
+QScrollBar::handle:vertical {
+    background: #566573;
+    min-height: 20px;
+    border-radius: 6px;
+}
+
+/* Footer */
+#Footer {
+    background-color: #1C2833;
+    color: #BDC3C7;
+    padding: 6px;
+    font-size: 9pt;
+}
+
+/* Sidebar */
+#Sidebar {
+    background-color: #1F2D3A;
+    color: #ECF0F1;
+    max-width: 180px;
+}
+
+#Sidebar QPushButton {
+    background: none;
+    border: none;
+    color: #ECF0F1;
+    padding: 12px;
+    text-align: left;
+    border-radius: 0;
+}
+
+#Sidebar QPushButton:hover {
+    background-color: #283747;
+}
+
+#Sidebar QPushButton[isActive="true"] {
+    background-color: #3498DB;
+    font-weight: bold;
+}
+
+/* Navbar */
+#NavBar {
+    background-color: #2C3E50;
+    border-bottom: 1px solid #34495E;
+}

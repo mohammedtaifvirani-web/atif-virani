@@ -2,53 +2,53 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import annotations
-
 import json
 from pathlib import Path
 from typing import Any, Dict
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
-
 def app_paths() -> Dict[str, Path]:
-    assets = PROJECT_ROOT / "assets"
     data = PROJECT_ROOT / "data"
-    invoices = data / "invoices"
-    backups = data / "backups"
-    config_dir = PROJECT_ROOT / "config"
     return {
         "root": PROJECT_ROOT,
-        "assets": assets,
+        "assets": PROJECT_ROOT / "assets",
         "data": data,
-        "invoices": invoices,
-        "backups": backups,
-        "config": config_dir,
-        "settings": config_dir / "settings.json",
+        "invoices": data / "invoices",
+        "backups": data / "backups",
+        "config": PROJECT_ROOT / "config",
+        "settings": PROJECT_ROOT / "config" / "settings.json",
         "customers": data / "customers.json",
         "products": data / "products.json",
         "logs": PROJECT_ROOT / "app.log",
     }
 
-
+# Default settings structure for a fresh start or reset
 DEFAULT_SETTINGS: Dict[str, Any] = {
     "version": "1.0.0",
     "company": {
-        "name": "AVBilling Demo Company",
-        "address": "",
-        "phone": "",
-        "gst_no": "",
+        "name": "AVBilling Solutions",
+        "address": "123 Main Street, Anytown, India",
+        "gst_number": "",
         "logo_path": "",
     },
-    "ui": {"theme": "light"},
+    "invoice": {
+        "template": "Detailed",
+        "prefix": "INV-",
+    },
+    "application": {
+        "theme": "Light",
+    },
     "shortcuts": {
         "new_invoice": "Ctrl+N",
-        "save": "Ctrl+S",
-        "print": "Ctrl+P",
+        "save_invoice": "Ctrl+S",
+        "print_invoice": "Ctrl+P",
     },
-    "invoice": {"tax_default": 5, "discount_default": 0},
+    "navigation_shortcuts": {
+        "F1": "F1", "F2": "F2", "F3": "F3", "F4": "F4",
+        "F5": "F5", "F6": "F6", "F7": "F7", "F8": "F8",
+    },
 }
-
 
 SAMPLE_CUSTOMERS = {
     "customers": [
@@ -56,64 +56,59 @@ SAMPLE_CUSTOMERS = {
             "customer_id": "CUST001",
             "name": "Amit Traders",
             "phone": "9876543210",
-            "address": "Lucknow",
-            "gst_no": "GST123",
-            "total_purchases": 0,
-            "total_amount": 0,
+            "address": "Lucknow, UP",
+            "gst_number": "GSTN1234567890",
         }
     ]
 }
-
 
 SAMPLE_PRODUCTS = {
     "products": [
         {
             "product_code": "PROD001",
-            "product_name": "Chand Besan",
-            "rate_1kg": 90,
-            "rate_half_kg": 50,
-            "gst_rate": 5,
-            "stock": 1000,
+            "name": "Premium Besan",
+            "category": "Groceries",
+            "mrp": 100.0,
+            "selling_price": 95.0,
+            "stock": 500,
+            "unit": "kg",
+            "gst_percent": 5,
+            "hsn_code": "11061000",
         }
     ]
 }
 
-
 def current_financial_year() -> str:
     from datetime import date
-
     today = date.today()
     year = today.year
     if today.month < 4:  # FY starts in April
         return f"FY_{year-1}-{year}"
     return f"FY_{year}-{year+1}"
 
-
 def ensure_dir(path: Path) -> None:
     path.mkdir(parents=True, exist_ok=True)
 
-
-def ensure_file(path: Path, default_content: Dict[str, Any]) -> None:
-    if not path.exists():
-        path.write_text(json.dumps(default_content, indent=2), encoding="utf-8")
-
+def ensure_file(path: Path, default_content: Dict) -> None:
+    if not path.exists() or path.stat().st_size == 0:
+        try:
+            with path.open("w", encoding="utf-8") as f:
+                json.dump(default_content, f, indent=4)
+        except (IOError, json.JSONDecodeError) as e:
+            print(f"Error creating default file {path}: {e}")
 
 def ensure_initial_setup() -> None:
     paths = app_paths()
-    # Ensure directories
+    
+    # Ensure core directories exist
     for key in ("assets", "data", "invoices", "backups", "config"):
         ensure_dir(paths[key])
 
-    # Ensure settings.json
+    # Ensure essential JSON files exist and are valid
     ensure_file(paths["settings"], DEFAULT_SETTINGS)
-
-    # Ensure customers/products
     ensure_file(paths["customers"], SAMPLE_CUSTOMERS)
     ensure_file(paths["products"], SAMPLE_PRODUCTS)
 
-    # Ensure current FY invoices file
-    fy_name = current_financial_year() + ".json"
-    fy_file = paths["invoices"] / fy_name
-    ensure_file(fy_file, {"invoices": []})
-
-
+    # Ensure invoice file for the current financial year exists
+    fy_invoice_file = paths["invoices"] / (current_financial_year() + ".json")
+    ensure_file(fy_invoice_file, {"invoices": {}})
